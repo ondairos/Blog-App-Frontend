@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import Blog from './components/Blog'
 import Notification from './components/Notification'
+import Footer from './components/Footer'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -25,7 +26,7 @@ const App = () => {
   // save User to local storage effect hook
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if(loggedUserJSON) {
+    if (loggedUserJSON) {
       const parsedUser = JSON.parse(loggedUserJSON)
       setUser(parsedUser)
       blogService.setToken(parsedUser.token)
@@ -41,7 +42,7 @@ const App = () => {
         username, password,
       })
       //  save user to local storage from state(user)
-      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user)) 
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
 
       // send the user token for Authorization in the backend through notesService
       blogService.setToken(user.token)
@@ -106,6 +107,7 @@ const App = () => {
         </div>
       }
 
+      <Footer />
 
     </div>
   )
