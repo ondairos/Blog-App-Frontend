@@ -15,10 +15,21 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
+  // getAll blogs effect hook
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
     )
+  }, [])
+
+  // save User to local storage effect hook
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if(loggedUserJSON) {
+      const parsedUser = JSON.parse(loggedUserJSON)
+      setUser(parsedUser)
+      blogService.setToken(parsedUser.token)
+    }
   }, [])
 
   // handle login logic
@@ -29,6 +40,9 @@ const App = () => {
       const user = await loginService.login({
         username, password,
       })
+      //  save user to local storage from state(user)
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user)) 
+
       // send the user token for Authorization in the backend through notesService
       blogService.setToken(user.token)
       setUser(user)
@@ -40,6 +54,13 @@ const App = () => {
         setErrorMessage(null)
       }, 500)
     }
+  }
+
+  // clear Local storage function
+  const clearLocalStorage = () => {
+    window.localStorage.clear()
+    setUser(null)
+    return
   }
 
   // loginForm 
@@ -76,7 +97,7 @@ const App = () => {
       {user === null ? loginForm() :
         <div>
           <p>{user.name} logged-in</p>
-          <p>add blog : </p>
+          <button onClick={clearLocalStorage}>Logout</button>
 
           <h2>Blog List:</h2>
           {blogs.map(blog =>
