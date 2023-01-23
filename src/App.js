@@ -55,7 +55,7 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setErrorMessage('Wrong credentials')
+      setErrorMessage('Wrong username or password')
       setTimeout(() => {
         setErrorMessage(null)
       }, 500)
@@ -98,7 +98,14 @@ const App = () => {
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
         setNewBlog('')
+        setErrorMessage(
+          `a new blog post: '${returnedBlog.title}' by ${returnedBlog.author} was added!`
+        )
+        setInterval(() => {
+          setErrorMessage(``)
+        }, 5000);
       })
+
   }
 
   // loginForm 
