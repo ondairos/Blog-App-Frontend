@@ -42,15 +42,50 @@ const App = () => {
     }
   }
 
+  // loginForm 
+  const loginForm = () => (
+    <form onSubmit={handleLogin}>
+      <div>
+        username
+        <input
+          type="text"
+          value={username}
+          name="Username"
+          onChange={({ target }) => setUsername(target.value)}
+        />
+      </div>
+      <div>
+        password
+        <input
+          type="password"
+          value={password}
+          name="Password"
+          onChange={({ target }) => setPassword(target.value)}
+        />
+      </div>
+      <button type="submit">login</button>
+    </form>
+  )
+
   return (
     <div>
       <h2>Blogs</h2>
 
       <Notification message={errorMessage} />
 
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      {user === null ? loginForm() :
+        <div>
+          <p>{user.name} logged-in</p>
+          <p>add blog : </p>
+
+          <h2>Blog List:</h2>
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )}
+        </div>
+      }
+
+
     </div>
   )
 }
