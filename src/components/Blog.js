@@ -13,12 +13,12 @@ const Blog = ({ blog }) => {
   return (
     <div style={blogStyle}>
       ||{blog.title}||  by: {blog.author}
-      <Togglable buttonLabel ='blog_view'>
-        {blog.url}
+      <Togglable buttonLabel='Blog Details'>
+        URL: {blog.url}
         <br></br>
-       {blog.likes ? blog.likes : 0}     
+        Likes: {blog.likes ? blog.likes : 0}
         <br></br>
-        {blog.user.name}     
+        User:{blog.user.name}
         <br></br>
       </Togglable>
     </div>

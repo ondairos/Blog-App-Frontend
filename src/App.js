@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import './App.css'
 
 import Blog from './components/Blog'
 import Notification from './components/Notification'

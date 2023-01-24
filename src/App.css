@@ -1,0 +1,62 @@
+html {
+        max-width: 70ch;
+        padding: 3em 1em;
+        margin: auto;
+        line-height: 1.75;
+        font-size: 1.25em;
+        background-color: rgb(218, 228, 223);
+        text-shadow: 0.5px 0.5px 2px #666666;
+    }
+
+    main {
+        max-width: 38rem;
+        padding: 1rem;
+        margin: auto;
+
+    }
+
+    .wrapper {
+        width: 100%;
+        margin: 5px auto 5px auto;
+        border: 2px solid #000000;
+        background-color: #ffffff;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        letter-spacing: 0.2em;
+        text-shadow: 0.5px 0.5px 2px #666666;
+    }
+
+    img {
+        max-width: 100%;
+        min-width: 300px;
+        height: auto;
+
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column-reverse;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+        transform: translate(0, 0);
+        transition: .3s;
+    }
+
+
+    /* import end */
+
+
+    p,
+    ul,
+    ol {
+        margin-bottom: 2em;
+        color: #1d1d1d;
+        font-family: sans-serif;
+        letter-spacing: 0.2em;
+        text-shadow: 0.5px 0.5px 2px #666666;
+    }
