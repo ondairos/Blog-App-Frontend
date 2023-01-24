@@ -5,6 +5,7 @@ import Notification from './components/Notification'
 import Footer from './components/Footer'
 import LoginForm from './components/LoginForm'
 import BlogSubmitForm from './components/BlogSubmitForm'
+import Togglable from './components/Togglable'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -150,15 +151,19 @@ const App = () => {
           <button onClick={clearLocalStorage}>Logout</button>
 
           {/* {blogSubmitForm()} */}
-          <BlogSubmitForm
-            addBlog={addBlog}
-            title={title}
-            author={author}
-            url={url}
-            handleTitleChange={handleTitleChange}
-            handleAuthorChange={handleAuthorChange}
-            handleUrlChange={handleUrlChange}
-          />
+
+          <Togglable buttonLabel='blog_submit'>
+            <BlogSubmitForm
+              addBlog={addBlog}
+              title={title}
+              author={author}
+              url={url}
+              handleTitleChange={handleTitleChange}
+              handleAuthorChange={handleAuthorChange}
+              handleUrlChange={handleUrlChange}
+            />
+          </Togglable>
+
 
           <h2>Blog List:</h2>
           {blogs.map(blog =>
