@@ -13,9 +13,6 @@ import loginService from './services/login'
 const App = () => {
   const [blogs, setBlogs] = useState([])
 
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
   const [newBlog, setNewBlog] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -71,32 +68,10 @@ const App = () => {
     return
   }
 
-  // onChange title
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value)
-  }
-
-  //onChange author
-  const handleAuthorChange = (event) => {
-    setAuthor(event.target.value)
-  }
-  //onChange url
-  const handleUrlChange = (event) => {
-    setUrl(event.target.value)
-  }
 
   //add blog function
-  const addBlog = (event) => {
-    event.preventDefault()
-
-    const newBlogObject = {
-      // title string , author string, url string
-      title: title,
-      author: author,
-      url: url
-    }
-
-    blogService.create(newBlogObject)
+  const addBlog = (blogObject) => {
+    blogService.create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
         setNewBlog('')
@@ -113,6 +88,7 @@ const App = () => {
   return (
     <div>
       <h2>Blogs</h2>
+      <hr></hr>
 
       <Notification message={errorMessage} />
 
@@ -127,18 +103,13 @@ const App = () => {
         <div>
           <p>{user.name} logged-in</p>
           <button onClick={clearLocalStorage}>Logout</button>
+          <hr></hr>
 
           {/* {blogSubmitForm()} */}
 
           <Togglable buttonLabel='blog_submit'>
             <BlogSubmitForm
-              addBlog={addBlog}
-              title={title}
-              author={author}
-              url={url}
-              handleTitleChange={handleTitleChange}
-              handleAuthorChange={handleAuthorChange}
-              handleUrlChange={handleUrlChange}
+              createBlog={addBlog}
             />
           </Togglable>
 
@@ -149,7 +120,8 @@ const App = () => {
           )}
         </div>
       }
-
+      <br></br>
+      <hr></hr>
       <Footer />
 
     </div>
