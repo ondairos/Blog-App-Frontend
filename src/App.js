@@ -17,7 +17,6 @@ const App = () => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [newBlog, setNewBlog] = useState('')
-
   const [errorMessage, setErrorMessage] = useState(null)
 
   const [username, setUsername] = useState('')
@@ -110,27 +109,6 @@ const App = () => {
       })
 
   }
-
-
-  // sumbit Blog Form
-
-  // const blogSubmitForm = () => (
-  //   <>
-  //     <p>Add new blog post:</p>
-  //     <form onSubmit={addBlog}>
-  //       <label>Title:</label>
-  //       <input value={title} onChange={handleTitleChange}>
-  //       </input>
-  //       <label>Author:</label>
-  //       <input value={author} onChange={handleAuthorChange}>
-  //       </input>
-  //       <label>Url:</label>
-  //       <input value={url} onChange={handleUrlChange}>
-  //       </input>
-  //       <button type='submit'>Save</button>
-  //     </form>
-  //   </>
-  // )
 
   return (
     <div>

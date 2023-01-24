@@ -1,7 +1,11 @@
-const Blog = ({blog}) => (
-  <div>
-    ||{blog.title}||  by: {blog.author}
-  </div>  
-)
+import { useState } from "react"
 
+const Blog = ({ blog }) => {
+
+  return (
+    <div>
+      ||{blog.title}||  by: {blog.author}
+    </div>
+  )
+}
 export default Blog
