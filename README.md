@@ -1,55 +1,48 @@
-# Getting Started with Create React App
+# Blog List Application (React)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+This is a frontend React application that allows users to view and submit blogs.
+Features
 
-### `npm start`
+- Display a list of blogs
+- Handle user login and authentication
+- Allow users to submit new blogs
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technology Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React
+- Hooks (useState, useEffect, useRef)
+- Services (blogService, loginService)
 
-### `npm test`
+## How to use
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone the repository and install dependencies by running npm install
+Start the development server by running npm start
+The app will be available at http://localhost:3000
+To run tests, use npm test
 
-### `npm run build`
+## Functionality
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The app uses useState and useEffect hooks to manage the state of the app, and the useRef hook to access a specific component.
+handleLogin function is used to handle the login logic, it takes the username and password from the state and sends a request to the login service to authenticate the user.
+    addBlog function is used to handle the logic of adding a new blog, it takes a blogObject as an argument and sends a request to the blog service to add the new blog.
+    clearLocalStorage function is used to clear the local storage and log out the user.
+    The app also uses several services such as blogService and loginService to handle communication with the backend.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Note
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The application uses a proxy to connect to a backend server, the backend server should be running on http://localhost:3003 for the application to work correctly.
 
-### `npm run eject`
+## Author
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Ioannis Kantiloros
+## License
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the MIT License.
 
 
-### Deployment
+## Additional info
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The package.json file in the root of the project includes more information about the dependencies and scripts used in this project.
