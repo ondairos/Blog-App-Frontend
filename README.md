@@ -33,7 +33,7 @@ To run tests, use npm test
 
 - clearLocalStorage function is used to clear the local storage and log out the user.
 
-= The app also uses several services such as blogService and loginService to handle communication with the backend.
+- The app also uses several services such as blogService and loginService to handle communication with the backend.
 
 ## Note
 
