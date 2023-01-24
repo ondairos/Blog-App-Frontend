@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import Blog from './components/Blog'
 import Notification from './components/Notification'
@@ -19,6 +19,9 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+
+  // ref the blogsubmitform
+  const blogSubmitFormRef = useRef()
 
   // getAll blogs effect hook
   useEffect(() => {
@@ -71,6 +74,8 @@ const App = () => {
 
   //add blog function
   const addBlog = (blogObject) => {
+    // with the usage of useRef i use the toggleVisibility from Togglable component
+    blogSubmitFormRef.current.toggleVisibility()
     blogService.create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
@@ -107,7 +112,7 @@ const App = () => {
 
           {/* {blogSubmitForm()} */}
 
-          <Togglable buttonLabel='blog_submit'>
+          <Togglable buttonLabel='blog_submit' ref={blogSubmitFormRef}>
             <BlogSubmitForm
               createBlog={addBlog}
             />
