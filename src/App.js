@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
+import LoginForm from './components/LoginForm'
+import BlogSubmitForm from './components/BlogSubmitForm'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -108,50 +110,26 @@ const App = () => {
 
   }
 
-  // // loginForm 
-  // const loginForm = () => (
-  //   <form onSubmit={handleLogin}>
-  //     <div>
-  //       username
-  //       <input
-  //         type="text"
-  //         value={username}
-  //         name="Username"
-  //         onChange={({ target }) => setUsername(target.value)}
-  //       />
-  //     </div>
-  //     <div>
-  //       password
-  //       <input
-  //         type="password"
-  //         value={password}
-  //         name="Password"
-  //         onChange={({ target }) => setPassword(target.value)}
-  //       />
-  //     </div>
-  //     <button type="submit">login</button>
-  //   </form>
-  // )
 
   // sumbit Blog Form
 
-  const blogSubmitForm = () => (
-    <>
-      <p>Add new blog post:</p>
-      <form onSubmit={addBlog}>
-        <label>Title:</label>
-        <input value={title} onChange={handleTitleChange}>
-        </input>
-        <label>Author:</label>
-        <input value={author} onChange={handleAuthorChange}>
-        </input>
-        <label>Url:</label>
-        <input value={url} onChange={handleUrlChange}>
-        </input>
-        <button type='submit'>Save</button>
-      </form>
-    </>
-  )
+  // const blogSubmitForm = () => (
+  //   <>
+  //     <p>Add new blog post:</p>
+  //     <form onSubmit={addBlog}>
+  //       <label>Title:</label>
+  //       <input value={title} onChange={handleTitleChange}>
+  //       </input>
+  //       <label>Author:</label>
+  //       <input value={author} onChange={handleAuthorChange}>
+  //       </input>
+  //       <label>Url:</label>
+  //       <input value={url} onChange={handleUrlChange}>
+  //       </input>
+  //       <button type='submit'>Save</button>
+  //     </form>
+  //   </>
+  // )
 
   return (
     <div>
@@ -160,7 +138,7 @@ const App = () => {
       <Notification message={errorMessage} />
 
       {/* {user === null ? loginForm() : */}
-      {user === null ? <loginForm
+      {user === null ? <LoginForm
         username={username}
         password={password}
         handleUsernameChange={({ target }) => setUsername(target.value)}
@@ -171,7 +149,16 @@ const App = () => {
           <p>{user.name} logged-in</p>
           <button onClick={clearLocalStorage}>Logout</button>
 
-          {blogSubmitForm()}
+          {/* {blogSubmitForm()} */}
+          <BlogSubmitForm
+            addBlog={addBlog}
+            title={title}
+            author={author}
+            url={url}
+            handleTitleChange={handleTitleChange}
+            handleAuthorChange={handleAuthorChange}
+            handleUrlChange={handleUrlChange}
+          />
 
           <h2>Blog List:</h2>
           {blogs.map(blog =>
