@@ -25,15 +25,15 @@ To run tests, use npm test
 
 ## Functionality
 
-The app uses useState and useEffect hooks to manage the state of the app, and the useRef hook to access a specific component.
+- The app uses useState and useEffect hooks to manage the state of the app, and the useRef hook to access a specific component.
 
-handleLogin function is used to handle the login logic, it takes the username and password from the state and sends a request to the login service to authenticate the user.
+- handleLogin function is used to handle the login logic, it takes the username and password from the state and sends a request to the login service to authenticate the user.
 
-addBlog function is used to handle the logic of adding a new blog, it takes a blogObject as an argument and sends a request to the blog service to add the new blog.
+- addBlog function is used to handle the logic of adding a new blog, it takes a blogObject as an argument and sends a request to the blog service to add the new blog.
 
-clearLocalStorage function is used to clear the local storage and log out the user.
+- clearLocalStorage function is used to clear the local storage and log out the user.
 
-The app also uses several services such as blogService and loginService to handle communication with the backend.
+= The app also uses several services such as blogService and loginService to handle communication with the backend.
 
 ## Note
 
