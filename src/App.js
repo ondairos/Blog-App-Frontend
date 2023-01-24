@@ -108,30 +108,30 @@ const App = () => {
 
   }
 
-  // loginForm 
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username
-        <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
-        password
-        <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>
-  )
+  // // loginForm 
+  // const loginForm = () => (
+  //   <form onSubmit={handleLogin}>
+  //     <div>
+  //       username
+  //       <input
+  //         type="text"
+  //         value={username}
+  //         name="Username"
+  //         onChange={({ target }) => setUsername(target.value)}
+  //       />
+  //     </div>
+  //     <div>
+  //       password
+  //       <input
+  //         type="password"
+  //         value={password}
+  //         name="Password"
+  //         onChange={({ target }) => setPassword(target.value)}
+  //       />
+  //     </div>
+  //     <button type="submit">login</button>
+  //   </form>
+  // )
 
   // sumbit Blog Form
 
@@ -159,7 +159,14 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      {user === null ? loginForm() :
+      {/* {user === null ? loginForm() : */}
+      {user === null ? <loginForm
+        username={username}
+        password={password}
+        handleUsernameChange={({ target }) => setUsername(target.value)}
+        handlePasswordChange={({ target }) => setPassword(target.value)}
+        handleSubmit={handleLogin}
+      /> :
         <div>
           <p>{user.name} logged-in</p>
           <button onClick={clearLocalStorage}>Logout</button>
