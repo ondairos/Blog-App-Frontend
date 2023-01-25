@@ -117,7 +117,21 @@ const App = () => {
       });
   }
 
-  const sorted_blogs = blogs.sort((a,b) => b.likes - a.likes)
+  // delete blog
+  const deleteBlog = (blogObject) => {
+    if (window.confirm(`Are you sure you want to delete blog post: ${blogObject.title} ?`)) {
+      blogService.deleteB(blogObject)
+        .then(deletedBlog => {
+          setBlogs(blogs.filter(blog => blog.id !== deletedBlog.id))
+          setErrorMessage(`blog post ${deletedBlog.title} was deleted`)
+          setInterval(() => {
+            setErrorMessage(``)
+          }, 5000)
+        })
+    }
+  }
+
+  const sorted_blogs = blogs.sort((a, b) => b.likes - a.likes)
   // console.log(sorted_blogs);
 
   return (
@@ -151,7 +165,7 @@ const App = () => {
 
           <h2>Blog List:</h2>
           {sorted_blogs.map(blog =>
-            <Blog key={blog._id} blog={blog} handleLike={addLike} />
+            <Blog key={blog._id} blog={blog} handleLike={addLike} handleDelete={deleteBlog} currentUser={user} />
           )}
         </div>
       }
