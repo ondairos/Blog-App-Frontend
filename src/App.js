@@ -109,6 +109,7 @@ const App = () => {
 
     blogService.update(blogId, newObject)
       .then((updatedBlog) => {
+        console.log(updatedBlog);
         setBlogs(blogs.map(element => element._id !== blogId ? element : updatedBlog))
       })
       .catch((error) => {
@@ -116,7 +117,8 @@ const App = () => {
       });
   }
 
-
+  const sorted_blogs = blogs.sort((a,b) => b.likes - a.likes)
+  // console.log(sorted_blogs);
 
   return (
     <div>
@@ -148,7 +150,7 @@ const App = () => {
 
 
           <h2>Blog List:</h2>
-          {blogs.map(blog =>
+          {sorted_blogs.map(blog =>
             <Blog key={blog._id} blog={blog} handleLike={addLike} />
           )}
         </div>
