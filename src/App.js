@@ -80,7 +80,6 @@ const App = () => {
     blogService.create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
-        setNewBlog('')
         setErrorMessage(
           `a new blog post: '${returnedBlog.title}' by ${returnedBlog.author} was added!`
         )
@@ -118,16 +117,27 @@ const App = () => {
   }
 
   // delete blog
-  const deleteBlog = (blogObject) => {
-    if (window.confirm(`Are you sure you want to delete blog post: ${blogObject.title} ?`)) {
-      blogService.deleteB(blogObject)
-        .then(deletedBlog => {
-          setBlogs(blogs.filter(blog => blog.id !== deletedBlog.id))
-          setErrorMessage(`blog post ${deletedBlog.title} was deleted`)
-          setInterval(() => {
-            setErrorMessage(``)
-          }, 5000)
-        })
+  // const deleteBlog = (blogObject) => {
+  //   if (window.confirm(`Are you sure you want to delete blog post: ${blogObject.title} ?`)) {
+  //     blogService.deleteB(blogObject._id)
+  //       .then(deletedBlog => {
+  //         setBlogs(blogs.filter(blog => blog.id !== deletedBlog._id))
+  //         setNewBlog('')
+  //         setErrorMessage(`blog post ${deletedBlog.title} was deleted`)
+  //         setInterval(() => {
+  //           setErrorMessage(``)
+  //         }, 5000)
+  //       })
+  //   }
+  // }
+
+  const deleteBlog = async (blogObject) => {
+    if (window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author} ?`)) {
+      await blogService.deleteB(blogObject._id)
+
+      let blogs = await blogService.getAll()
+      const sorted_blogs = blogs.sort((a, b) => b.likes - a.likes)
+      setBlogs(sorted_blogs)
     }
   }
 
