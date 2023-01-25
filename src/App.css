@@ -6,13 +6,15 @@ html {
         font-size: 1.25em;
         background-color: rgb(218, 228, 223);
         text-shadow: 0.5px 0.5px 2px #666666;
+        text-align: center;
     }
-
+    
     main {
         max-width: 38rem;
         padding: 1rem;
         margin: auto;
-
+        align-content: center;
+        
     }
 
     .wrapper {

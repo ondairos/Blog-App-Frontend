@@ -1,7 +1,7 @@
-import { useState } from "react"
+// import { useState } from "react"
 import Togglable from "./Togglable"
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, handleLike }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -9,6 +9,7 @@ const Blog = ({ blog }) => {
     borderWidth: 1,
     marginBottom: 5
   }
+
 
   return (
     <div style={blogStyle}>
@@ -20,6 +21,7 @@ const Blog = ({ blog }) => {
         <br></br>
         User:{blog.user.name}
         <br></br>
+        <button onClick={() => handleLike(blog._id, blog.user._id)}>Like</button>
       </Togglable>
     </div>
   )

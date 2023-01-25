@@ -91,6 +91,33 @@ const App = () => {
 
   }
 
+  // //update blog function increase likes
+  const addLike = (blogId, userId) => {
+    // retrieve the current number of likes
+    const currentBlog = blogs.find(blog => blog._id === blogId);
+    if (!currentBlog) {
+      console.error(`Blog with id ${blogId} not found`);
+      return;
+    }
+    const currentLikes = currentBlog.likes;
+
+    // send the current number of likes in the request
+    const newObject = {
+      user: userId,
+      likes: currentLikes + 1
+    }
+
+    blogService.update(blogId, newObject)
+      .then((updatedBlog) => {
+        setBlogs(blogs.map(element => element._id !== blogId ? element : updatedBlog))
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+
+
   return (
     <div>
       <h2>Blogs</h2>
@@ -122,7 +149,7 @@ const App = () => {
 
           <h2>Blog List:</h2>
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} />
+            <Blog key={blog._id} blog={blog} handleLike={addLike} />
           )}
         </div>
       }
