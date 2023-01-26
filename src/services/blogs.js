@@ -30,4 +30,6 @@ const deleteB = async (id) => {
   return request.data
 }
 
-export default { getAll, create, update, deleteB, setToken }
+const exportBlogsService = { getAll, create, update, deleteB, setToken }
+
+export default exportBlogsService
