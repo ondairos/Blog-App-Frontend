@@ -6,6 +6,7 @@ import { getByText, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 import Togglable from "./Togglable";
+import BlogSubmitForm from "./BlogSubmitForm";
 
 test('component renders titlerino', () => {
     const blog = {
@@ -100,4 +101,23 @@ describe('<Togglable />', () => {
         expect(div).toHaveStyle('display: none')
     })
 
+})
+
+describe('BlogSubmitForm Tests', () => {
+
+    test('BlogSubmitForm updates parent state and calls onSubmit', async () => {
+        const createBlog = jest.fn()
+        const user = userEvent.setup()
+
+        render(<BlogSubmitForm createBlog={createBlog} />)
+
+        const input = screen.getByLabelText('Title:')
+        const sendButton = screen.getByText('Save')
+
+        await user.type(input, 'testing a form...')
+        await user.click(sendButton)
+
+        expect(createBlog.mock.calls).toHaveLength(1)
+        expect(createBlog.mock.calls[0][0].title).toBe('testing a form...')
+    })
 })
