@@ -12,14 +12,14 @@ const Blog = ({ blog, handleLike, handleDelete, currentUser }) => {
 
 
   return (
-    <div style={blogStyle}>
-      ||{blog.title}||  by: {blog.author}
+    <div style={blogStyle} className='main_blog'>
+      <p>||<span>{blog.title}</span>||  by: <span>{blog.author}</span></p>
       <Togglable buttonLabel='Blog Details'>
-        URL: {blog.url}
+        <p>URL: {blog.url}</p>
         <br></br>
-        Likes: {blog.likes ? blog.likes : 0}
+        <p>Likes: {blog.likes ? blog.likes : 0}</p>
         <br></br>
-        User:{blog.user.name}
+        <p>User:{blog.user?.name || 'N/A'}</p>
         <br></br>
         <button onClick={() => handleLike(blog._id, blog.user._id)}>Like</button>
         {currentUser !== null && currentUser.username === blog.user.username && <button onClick={() => handleDelete(blog)}>delete</button>}
