@@ -13,7 +13,9 @@ const Blog = ({ blog, handleLike, handleDelete, currentUser }) => {
 
   return (
     <div style={blogStyle} className='main_blog'>
-      <p>||<span>{blog.title}</span>||  by: <span>{blog.author}</span></p>
+      <div className="blogTitle">
+        <p><span>{blog.title}</span> by: <span>{blog.author}</span></p>
+      </div>
       <Togglable buttonLabel='Blog Details'>
         <p>URL: {blog.url}</p>
         <br></br>

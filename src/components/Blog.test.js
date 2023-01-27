@@ -116,10 +116,30 @@ describe('BlogSubmitForm Tests', () => {
         const input = screen.getByPlaceholderText('Insert Title')
         const sendButton = screen.getByText('Save')
 
+        // const element = screen.getByText('Does not work anymore', { exact: false }
+        // )
+
+        // const element2 = await screen.findByText('Does not work anymore')
+
         await user.type(input, 'testing a form...')
         await user.click(sendButton)
 
         expect(createBlog.mock.calls).toHaveLength(1)
         expect(createBlog.mock.calls[0][0].title).toBe('testing a form...')
+    })
+
+    test('does not render this', () => {
+        const blog = {
+            title: 'My blog title',
+            author: 'John Smith',
+            url: 'test.com',
+            likes: 12,
+            user: { name: 'test2' }
+        }
+
+        render(<Blog blog={blog} />)
+
+        const element = screen.queryByText('do not want this thing to be rendered')
+        expect(element).toBeNull()
     })
 })
