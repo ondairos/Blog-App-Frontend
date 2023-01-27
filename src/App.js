@@ -164,8 +164,6 @@ const App = () => {
           <button onClick={clearLocalStorage}>Logout</button>
           <hr></hr>
 
-          {/* {blogSubmitForm()} */}
-
           <Togglable buttonLabel='blog_submit' ref={blogSubmitFormRef}>
             <BlogSubmitForm
               createBlog={addBlog}

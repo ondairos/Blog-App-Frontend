@@ -46,10 +46,10 @@ const BlogSubmitForm = ({ createBlog }) => {
                 <input id='titleInput' className='form_title' value={title} onChange={handleTitleChange} placeholder='Insert Title'>
                 </input>
                 <label>Author:</label>
-                <input value={author} onChange={handleAuthorChange} placeholder='Insert Author'>
+                <input id='authorInput' value={author} onChange={handleAuthorChange} placeholder='Insert Author'>
                 </input>
                 <label>Url:</label>
-                <input value={url} onChange={handleUrlChange} placeholder='Insert Url'>
+                <input id='urlInput' value={url} onChange={handleUrlChange} placeholder='Insert Url'>
                 </input>
                 <input value={likes} onChange={handleLikesChange} placeholder='Insert Likes'>
                 </input>
