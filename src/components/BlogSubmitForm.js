@@ -23,7 +23,7 @@ const BlogSubmitForm = ({ createBlog }) => {
     }
 
     const handleLikesChange = (event) => {
-        setUrl(event.target.value)
+        setLikes(event.target.value)
     }
 
     //add blog function
@@ -43,15 +43,15 @@ const BlogSubmitForm = ({ createBlog }) => {
             <p>Add new blog post:</p>
             <form onSubmit={addBlog}>
                 <label for='titleInput'>Title:</label>
-                <input id='titleInput' className='form_title' value={title} onChange={handleTitleChange}>
+                <input id='titleInput' className='form_title' value={title} onChange={handleTitleChange} placeholder='Insert Title'>
                 </input>
                 <label>Author:</label>
-                <input value={author} onChange={handleAuthorChange}>
+                <input value={author} onChange={handleAuthorChange} placeholder='Insert Author'>
                 </input>
                 <label>Url:</label>
-                <input value={url} onChange={handleUrlChange}>
+                <input value={url} onChange={handleUrlChange} placeholder='Insert Url'>
                 </input>
-                <input value={likes} onChange={handleLikesChange}>
+                <input value={likes} onChange={handleLikesChange} placeholder='Insert Likes'>
                 </input>
                 <button type='submit'>Save</button>
             </form>

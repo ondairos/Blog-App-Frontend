@@ -111,10 +111,11 @@ describe('BlogSubmitForm Tests', () => {
 
         render(<BlogSubmitForm createBlog={createBlog} />)
 
-        const input = screen.getByLabelText('Title:')
+        // const input = screen.getByLabelText('Title:')
+        const inputs = screen.getAllByRole('textbox')
         const sendButton = screen.getByText('Save')
 
-        await user.type(input, 'testing a form...')
+        await user.type(inputs[0], 'testing a form...')
         await user.click(sendButton)
 
         expect(createBlog.mock.calls).toHaveLength(1)
