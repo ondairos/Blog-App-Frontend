@@ -32,9 +32,10 @@ test('default view, can only see title and author', () => {
 
 // test('click view button and can see blog detail', () => {
 //     const component = render(
-//         <Blog blog={blog} />
+//         <Blog blog={blog} currentUser={currentUser} />
 //     )
 
+//     // i have Component Togglable here
 //     const buttonView = component.getByText('view')
 //     fireEvent.click(buttonView)
 
@@ -44,36 +45,37 @@ test('default view, can only see title and author', () => {
 //     expect(blogAll).toHaveTextContent(`${blog.likes}`)
 // })
 
-// test('click like button twice and likes will plus two', () => {
-//     const mockHandler = jest.fn()
+test('click like button twice and likes will plus two', () => {
+    const mockHandler = jest.fn()
 
-//     const component = render(
-//         <Blog blog={blog} handleLikeChange={mockHandler} />
-//     )
+    const component = render(
+        <Blog blog={blog} handleLike={mockHandler} currentUser={currentUser} />
+    )
 
-//     const buttonView = component.getByText('view')
-//     fireEvent.click(buttonView)
+    // i have Component Togglable here
+    // const buttonView = component.getByText('view')
+    // fireEvent.click(buttonView)
 
-//     const blogAll = component.container.querySelector('.blogAll')
-//     expect(blogAll).toBeVisible()
+    // const blogAll = component.container.querySelector('.blogAll')
+    // expect(blogAll).toBeVisible()
 
-//     const buttonLike = component.getByText('like')
-//     fireEvent.click(buttonLike)
-//     fireEvent.click(buttonLike)
+    const buttonLike = component.getByText('Like')
+    fireEvent.click(buttonLike)
+    fireEvent.click(buttonLike)
 
-//     expect(mockHandler.mock.calls).toHaveLength(2)
-// })
+    expect(mockHandler.mock.calls).toHaveLength(2)
+})
 
-// test('create a new blog', () => {
-//     const component = render(
-//         <BlogSubmitForm />
-//     )
+test('create a new blog', () => {
+    const component = render(
+        <BlogSubmitForm />
+    )
 
-//     const title = component.container.querySelector('#title')
-//     const author = component.container.querySelector('#author')
-//     const url = component.container.querySelector('#url')
+    const title = component.container.querySelector('#title')
+    const author = component.container.querySelector('#author')
+    const url = component.container.querySelector('#url')
 
-//     expect(title).toBeDefined()
-//     expect(author).toBeDefined()
-//     expect(url).toBeDefined()
-// })
+    expect(title).toBeDefined()
+    expect(author).toBeDefined()
+    expect(url).toBeDefined()
+})
