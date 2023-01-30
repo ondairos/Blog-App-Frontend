@@ -52,6 +52,13 @@ describe('Blog app', function () {
             cy.contains('Blog List:')
         })
 
+        it('then example', function () {
+            cy.get('button').then(buttons => {
+                console.log('number of buttons: ', buttons.length)
+                cy.wrap(buttons[0]).click()
+            })
+        })
+
         // each test starts from zero as far as the browser is concerned. All changes to the browser's state are reversed after each test.
         it('a new blog post can be created', function () {
             cy.get('#toggle_button').should('be.visible').click()
