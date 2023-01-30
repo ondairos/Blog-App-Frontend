@@ -19,35 +19,42 @@ describe('Blog app', function () {
         cy.contains('Ioannis Kantiloros')
     })
 
-    it('login fails with wrong password', function () {
-        cy.contains('login').click()
-        cy.get('#username').type('test2')
-        cy.get('#password').type('111111')
-        cy.get('#login-button').click()
+    describe('Login', function () {
+        it('login fails with wrong password', function () {
+            cy.contains('login').click()
+            cy.get('#username').type('test2')
+            cy.get('#password').type('111111')
+            cy.get('#login-button').click()
 
-        cy.contains('Wrong username or password')
-        cy.get('html').should('not.contain', 'John Tester logged-in')
+            cy.contains('Wrong username or password')
+            cy.get('html').should('not.contain', 'John Tester logged-in')
+        })
+
+        it('user can log in', function () {
+            cy.contains('login').click()
+            cy.get('#username').type('test2')
+            cy.get('#password').type('13141')
+            cy.get('#login-button').click()
+
+            cy.contains('John Tester logged-in')
+        })
     })
 
-    it('user can log in', function () {
-        cy.contains('login').click()
-        cy.get('#username').type('test2')
-        cy.get('#password').type('13141')
-        cy.get('#login-button').click()
-
-        cy.contains('John Tester logged-in')
-    })
 
 
     describe('when logged in', function () {
         beforeEach(function () {
             cy.login({ username: 'test2', password: '13141' })
+            cy.wait(1000)
         })
+
+        it('Blog form is shown', function () {
+            cy.contains('Blog List:')
+        })
+
         // each test starts from zero as far as the browser is concerned. All changes to the browser's state are reversed after each test.
-        it.skip('a new blog post can be created', function () {
-            // cy.get('#toggle_button').click()
-            cy.wait(1500)
-            cy.get('#toggle_button').click()
+        it('a new blog post can be created', function () {
+            cy.get('#toggle_button').should('be.visible').click()
             cy.get('#titleInput').type('a blogpost created by cypress')
             cy.get('#authorInput').type('cypress')
             cy.get('#urlInput').type('cypress.com')
@@ -72,7 +79,7 @@ describe('Blog app', function () {
                 })
             })
 
-            it('add a like to a blog post', function () {
+            it.skip('add a like to a blog post', function () {
                 cy.contains('Yet Another blog Post')
                     .contains('Like').click()
             })

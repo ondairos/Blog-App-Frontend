@@ -31,21 +31,21 @@ Cypress.Commands.add('login', ({ username, password }) => {
     cy.request('POST', 'http://localhost:3003/api/login', {
         username, password
     }).then(({ body }) => {
-        localStorage.setItem('loggedBlogAppUser', JSON.stringify(body))
+        localStorage.setItem('loggedBlogappUser', JSON.stringify(body))
         cy.visit('http://localhost:3000')
     })
 })
 
 // create blog post command
 Cypress.Commands.add('createBlogPost', ({ title, author, blogUrl, likes }) => {
+    const user = JSON.parse(localStorage.getItem('loggedBlogappUser'))
     cy.request({
         url: 'http://localhost:3003/api/blogs',
         method: 'POST',
         body: { title, author, blogUrl, likes },
         headers: {
-            'Authorization': `bearer ${JSON.parse(localStorage.getItem('loggedBlogAppUser')).token}`
+            'Authorization': `bearer ${JSON.parse(localStorage.getItem('loggedBlogappUser')).token}`
         }
     })
-
     cy.visit('http://localhost:3000')
 })
