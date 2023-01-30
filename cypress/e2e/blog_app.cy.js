@@ -19,7 +19,7 @@ describe('Blog app', function () {
         cy.contains('Ioannis Kantiloros')
     })
 
-    it.only('login fails with wrong password', function () {
+    it('login fails with wrong password', function () {
         cy.contains('login').click()
         cy.get('#username').type('test2')
         cy.get('#password').type('111111')
@@ -40,14 +40,18 @@ describe('Blog app', function () {
 
     describe('when logged in', function () {
         beforeEach(function () {
-            cy.contains('login').click()
-            cy.get('#username').type('test2')
-            cy.get('#password').type('13141')
-            cy.get('#login-button').click()
+            cy.request('POST', 'http://localhost:3003/api/login', {
+                username: 'test2', password: '13141'
+            }).then(response => {
+                localStorage.setItem('loggedBlogAppUser', JSON.stringify(response.body))
+                cy.visit('http://localhost:3000')
+            })
 
         })
         // each test starts from zero as far as the browser is concerned. All changes to the browser's state are reversed after each test.
-        it('a new note can be created', function () {
+        it('a new blog post can be created', function () {
+            // cy.get('#toggle_button').click()
+            cy.wait(1500)
             cy.get('#toggle_button').click()
             cy.get('#titleInput').type('a blogpost created by cypress')
             cy.get('#authorInput').type('cypress')

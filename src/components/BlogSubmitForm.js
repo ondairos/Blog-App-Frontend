@@ -42,7 +42,7 @@ const BlogSubmitForm = ({ createBlog }) => {
         <div className="formDiv">
             <p>Add new blog post:</p>
             <form onSubmit={addBlog}>
-                <label for='titleInput'>Title:</label>
+                <label htmlFor='titleInput'>Title:</label>
                 <input id='titleInput' className='form_title' value={title} onChange={handleTitleChange} placeholder='Insert Title'>
                 </input>
                 <label>Author:</label>
