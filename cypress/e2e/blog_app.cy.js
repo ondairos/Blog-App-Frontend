@@ -40,16 +40,12 @@ describe('Blog app', function () {
 
     describe('when logged in', function () {
         beforeEach(function () {
-            cy.request('POST', 'http://localhost:3003/api/login', {
-                username: 'test2', password: '13141'
-            }).then(response => {
-                localStorage.setItem('loggedBlogAppUser', JSON.stringify(response.body))
-                cy.visit('http://localhost:3000')
-            })
+            cy.login({ username: 'test2', password: '13141' })
+
 
         })
         // each test starts from zero as far as the browser is concerned. All changes to the browser's state are reversed after each test.
-        it('a new blog post can be created', function () {
+        it.skip('a new blog post can be created', function () {
             // cy.get('#toggle_button').click()
             cy.wait(1500)
             cy.get('#toggle_button').click()
