@@ -64,6 +64,17 @@ describe('Blog app', function () {
                     blogUrl: 'lorem.com',
                     likes: 111
                 })
+                cy.createBlogPost({
+                    title: 'Yet Another blog Post',
+                    author: 'Lorema Ipsum',
+                    blogUrl: 'lorema.com',
+                    likes: 10
+                })
+            })
+
+            it('add a like to a blog post', function () {
+                cy.contains('Yet Another blog Post')
+                    .contains('Like').click()
             })
         })
     })
