@@ -38,11 +38,10 @@ describe('Blog app', function () {
         cy.contains('John Tester logged-in')
     })
 
+
     describe('when logged in', function () {
         beforeEach(function () {
             cy.login({ username: 'test2', password: '13141' })
-
-
         })
         // each test starts from zero as far as the browser is concerned. All changes to the browser's state are reversed after each test.
         it.skip('a new blog post can be created', function () {
@@ -55,6 +54,17 @@ describe('Blog app', function () {
 
             cy.contains('Save').click()
             cy.contains('a blogpost created by cypress by: cypress')
+        })
+
+        describe('and a blog post exists', function () {
+            beforeEach(function () {
+                cy.createBlogPost({
+                    title: 'Another blog Post',
+                    author: 'Lorem Ipsum',
+                    blogUrl: 'lorem.com',
+                    likes: 111
+                })
+            })
         })
     })
 })
