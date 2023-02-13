@@ -12,6 +12,10 @@ import { ReduxTest } from './components/ReduxTest'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
+//redux imports
+import { } from './reducers/blogReducer'
+import { useSelector, useDispatch } from 'react-redux'
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
 
@@ -24,6 +28,11 @@ const App = () => {
 
   // ref the blogsubmitform
   const blogSubmitFormRef = useRef()
+
+  //redux init
+  const dispatch = useDispatch()
+  // const blogs = useSelector(state => state)
+
 
   // getAll blogs effect hook
   useEffect(() => {
