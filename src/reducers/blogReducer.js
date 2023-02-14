@@ -11,12 +11,24 @@ const blogSlice = createSlice({
         },
         setBlogs(state, action) {
             return action.payload
+        },
+        setAuthor(state, action) {
+            return action.payload
+        },
+        setUrl(state, action) {
+            return action.payload
+        },
+        setTitle(state, action) {
+            return action.payload
+        },
+        setLikes(state, action) {
+            return action.payload
         }
     }
 })
 
 // action reducers
-export const { appendBlog, setBlogs } = blogSlice.actions
+export const { appendBlog, setBlogs, setAuthor, setUrl, setTitle, setLikes } = blogSlice.actions
 
 //init blogs
 export const initializedBlogs = () => {

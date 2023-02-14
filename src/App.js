@@ -154,7 +154,6 @@ const App = () => {
         return result
     })
     const sorted_blogs = [...blogsRedux].sort((a, b) => b.likes - a.likes)
-    // console.log(sorted_blogs);
 
     return (
         <div>
@@ -178,7 +177,7 @@ const App = () => {
 
                     <Togglable buttonLabel='blog_submit' ref={blogSubmitFormRef}>
                         <BlogSubmitForm
-                            createBlog={addBlog}
+                            createBlogProp={addBlog}
                         />
                     </Togglable>
 
