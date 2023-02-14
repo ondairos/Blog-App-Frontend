@@ -2,7 +2,7 @@
 import { useDispatch } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 
-const BlogSubmitForm = ({ createBlogProp }) => {
+const BlogSubmitForm = () => {
     const dispatch = useDispatch()
 
     // const [title, setTitle] = useState('')
@@ -60,15 +60,15 @@ const BlogSubmitForm = ({ createBlogProp }) => {
             <p>Add new blog post:</p>
             <form onSubmit={addBlog}>
                 <label htmlFor='titleInput'>Title:</label>
-                <input id='titleInput' className='form_title' placeholder='Insert Title'>
+                <input id='titleInput' name='title' className='form_title' placeholder='Insert Title'>
                 </input>
                 <label>Author:</label>
-                <input id='authorInput' placeholder='Insert Author'>
+                <input id='authorInput' name='author' placeholder='Insert Author'>
                 </input>
                 <label>Url:</label>
-                <input id='urlInput' placeholder='Insert Url'>
+                <input id='urlInput' name='url' placeholder='Insert Url'>
                 </input>
-                <input placeholder='Insert Likes'>
+                <input placeholder='Insert Likes' name='likes' value='0'>
                 </input>
                 <button type='submit'>Save</button>
             </form>

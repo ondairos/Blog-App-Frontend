@@ -12,7 +12,7 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 
 //redux imports
-import { createBlog, initializedBlogs } from './reducers/blogReducer'
+import { initializedBlogs } from './reducers/blogReducer'
 import { useDispatch, useSelector } from 'react-redux'
 
 const App = () => {
@@ -99,18 +99,18 @@ const App = () => {
     // }
 
 
-    const addBlog = (blogObject) => {
-        blogSubmitFormRef.current.toggleVisibility()
-        createBlog(blogObject)
-            .then((returnedBlog) => {
-                setErrorMessage(
-                    `a new blog post: '${returnedBlog.title}' by ${returnedBlog.author} was added!`
-                )
-                setInterval(() => {
-                    setErrorMessage('')
-                }, 5000)
-            })
-    }
+    // const addBlog = (blogObject) => {
+    //     blogSubmitFormRef.current.toggleVisibility()
+    //     createBlog(blogObject)
+    //         .then((returnedBlog) => {
+    //             setErrorMessage(
+    //                 `a new blog post: '${returnedBlog.title}' by ${returnedBlog.author} was added!`
+    //             )
+    //             setInterval(() => {
+    //                 setErrorMessage('')
+    //             }, 5000)
+    //         })
+    // }
 
     // //update blog function increase likes
     const addLike = (blogId, userId) => {
@@ -190,9 +190,7 @@ const App = () => {
                     <hr></hr>
 
                     <Togglable buttonLabel='blog_submit' ref={blogSubmitFormRef}>
-                        <BlogSubmitForm
-                            createBlogProp={addBlog}
-                        />
+                        <BlogSubmitForm/>
                     </Togglable>
 
                     <h2>Blog List:</h2>
