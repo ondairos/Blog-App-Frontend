@@ -13,7 +13,7 @@ import loginService from './services/login'
 
 //redux imports
 import { initializedBlogs } from './reducers/blogReducer'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const App = () => {
     const [blogs, setBlogs] = useState([])
@@ -132,36 +132,22 @@ const App = () => {
             })
     }
 
-    // delete blog
-    // const deleteBlog = (blogObject) => {
-    //   if (window.confirm(`Are you sure you want to delete blog post: ${blogObject.title} ?`)) {
-    //     blogService.deleteB(blogObject._id)
-    //       .then(deletedBlog => {
-    //         setBlogs(blogs.filter(blog => blog.id !== deletedBlog._id))
-    //         setNewBlog('')
-    //         setErrorMessage(`blog post ${deletedBlog.title} was deleted`)
-    //         setInterval(() => {
-    //           setErrorMessage(``)
-    //         }, 5000)
-    //       })
-    //   }
+    // const deleteBlog = async (blogObject) => {
+    //     if (window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author} ?`)) {
+    //         await blogService.deleteB(blogObject._id)
+
+    //         let blogs = await blogService.getAll()
+    //         const sorted_blogs = blogs.sort((a, b) => b.likes - a.likes)
+    //         setBlogs(sorted_blogs)
+    //     }
     // }
 
-    const deleteBlog = async (blogObject) => {
-        if (window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author} ?`)) {
-            await blogService.deleteB(blogObject._id)
-
-            let blogs = await blogService.getAll()
-            const sorted_blogs = blogs.sort((a, b) => b.likes - a.likes)
-            setBlogs(sorted_blogs)
-        }
-    }
-
-    const blogsRedux = useSelector(({ blogs }) => {
-        let result = blogs
-        return result
-    })
-    const sorted_blogs = [...blogsRedux].sort((a, b) => b.likes - a.likes)
+    console.log()
+    // const blogsRedux = useSelector(({ blogs }) => {
+    //     let result = blogs
+    //     return result
+    // })
+    // const sorted_blogs = [...blogsRedux].sort((a, b) => b.likes - a.likes)
 
     return (
         <div>
@@ -188,9 +174,7 @@ const App = () => {
                     </Togglable>
 
                     <h2>Blog List:</h2>
-                    {sorted_blogs.map(blog =>
-                        <Blog key={blog._id} blog={blog} handleLike={addLike} handleDelete={deleteBlog} currentUser={user} />
-                    )}
+                    <Blog handleLike={addLike} currentUser={user} />
                 </div>
             }
             <br></br>
