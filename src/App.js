@@ -132,22 +132,7 @@ const App = () => {
             })
     }
 
-    // const deleteBlog = async (blogObject) => {
-    //     if (window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author} ?`)) {
-    //         await blogService.deleteB(blogObject._id)
 
-    //         let blogs = await blogService.getAll()
-    //         const sorted_blogs = blogs.sort((a, b) => b.likes - a.likes)
-    //         setBlogs(sorted_blogs)
-    //     }
-    // }
-
-    console.log()
-    // const blogsRedux = useSelector(({ blogs }) => {
-    //     let result = blogs
-    //     return result
-    // })
-    // const sorted_blogs = [...blogsRedux].sort((a, b) => b.likes - a.likes)
 
     return (
         <div>
