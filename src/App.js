@@ -12,7 +12,7 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 
 //redux imports
-import { initializedBlogs } from './reducers/blogReducer'
+import { createBlog, initializedBlogs } from './reducers/blogReducer'
 import { useDispatch, useSelector } from 'react-redux'
 
 const App = () => {
@@ -82,12 +82,27 @@ const App = () => {
 
 
     //add blog function
+    // const addBlog = (blogObject) => {
+    //     // with the usage of useRef i use the toggleVisibility from Togglable component
+    //     blogSubmitFormRef.current.toggleVisibility()
+    //     blogService.create(blogObject)
+    //         .then(returnedBlog => {
+    //             setBlogs(blogs.concat(returnedBlog))
+    //             setErrorMessage(
+    //                 `a new blog post: '${returnedBlog.title}' by ${returnedBlog.author} was added!`
+    //             )
+    //             setInterval(() => {
+    //                 setErrorMessage('')
+    //             }, 5000)
+    //         })
+
+    // }
+
+
     const addBlog = (blogObject) => {
-        // with the usage of useRef i use the toggleVisibility from Togglable component
         blogSubmitFormRef.current.toggleVisibility()
-        blogService.create(blogObject)
-            .then(returnedBlog => {
-                setBlogs(blogs.concat(returnedBlog))
+        createBlog(blogObject)
+            .then((returnedBlog) => {
                 setErrorMessage(
                     `a new blog post: '${returnedBlog.title}' by ${returnedBlog.author} was added!`
                 )
@@ -95,7 +110,6 @@ const App = () => {
                     setErrorMessage('')
                 }, 5000)
             })
-
     }
 
     // //update blog function increase likes
