@@ -13,8 +13,8 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 
 //redux imports
-import { } from './reducers/blogReducer'
-// import { useSelector, useDispatch } from 'react-redux'
+import { initializedBlogs } from './reducers/blogReducer'
+import { useDispatch, useSelector } from 'react-redux'
 
 const App = () => {
     const [blogs, setBlogs] = useState([])
@@ -30,17 +30,15 @@ const App = () => {
     const blogSubmitFormRef = useRef()
 
     //redux init
-    // const dispatch = useDispatch()
-    // const blogs = useSelector(state => state)
+    const dispatch = useDispatch()
 
 
     // getAll blogs effect hook
     useEffect(() => {
-        blogService.getAll().then(blogs =>
-            setBlogs(blogs)
-            //dispatch()
+        blogService.getAll().then(() =>
+            dispatch(initializedBlogs())
         )
-    }, [])
+    }, [dispatch])
 
     // save User to local storage effect hook
     useEffect(() => {
@@ -86,7 +84,7 @@ const App = () => {
 
     //add blog function
     const addBlog = (blogObject) => {
-    // with the usage of useRef i use the toggleVisibility from Togglable component
+        // with the usage of useRef i use the toggleVisibility from Togglable component
         blogSubmitFormRef.current.toggleVisibility()
         blogService.create(blogObject)
             .then(returnedBlog => {
@@ -103,7 +101,7 @@ const App = () => {
 
     // //update blog function increase likes
     const addLike = (blogId, userId) => {
-    // retrieve the current number of likes
+        // retrieve the current number of likes
         const currentBlog = blogs.find(blog => blog._id === blogId)
         if (!currentBlog) {
             console.error(`Blog with id ${blogId} not found`)
@@ -152,7 +150,11 @@ const App = () => {
         }
     }
 
-    const sorted_blogs = blogs.sort((a, b) => b.likes - a.likes)
+    const blogsRedux = useSelector(({ blogs }) => {
+        let result = blogs
+        return result
+    })
+    const sorted_blogs = [...blogsRedux].sort((a, b) => b.likes - a.likes)
     // console.log(sorted_blogs);
 
     return (

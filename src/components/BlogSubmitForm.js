@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 const BlogSubmitForm = ({ createBlog }) => {
 
@@ -6,6 +6,7 @@ const BlogSubmitForm = ({ createBlog }) => {
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
     const [likes, setLikes] = useState(0)
+    // eslint-disable-next-line no-unused-vars
     const [newBlog, setNewBlog] = useState('')
 
     // onChange title
