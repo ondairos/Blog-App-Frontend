@@ -7,7 +7,6 @@ import Footer from './components/Footer'
 import LoginForm from './components/LoginForm'
 import BlogSubmitForm from './components/BlogSubmitForm'
 import Togglable from './components/Togglable'
-import { ReduxTest } from './components/ReduxTest'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -182,9 +181,6 @@ const App = () => {
                             createBlog={addBlog}
                         />
                     </Togglable>
-
-                    <ReduxTest></ReduxTest>
-
 
                     <h2>Blog List:</h2>
                     {sorted_blogs.map(blog =>
