@@ -18,9 +18,6 @@ import { useDispatch, useSelector } from 'react-redux'
 const App = () => {
     const [blogs, setBlogs] = useState([])
 
-    // const [newBlog, setNewBlog] = useState('')
-    const [errorMessage, setErrorMessage] = useState(null)
-
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
@@ -66,10 +63,7 @@ const App = () => {
             setUsername('')
             setPassword('')
         } catch (exception) {
-            setErrorMessage('Wrong username or password')
-            setTimeout(() => {
-                setErrorMessage(null)
-            }, 500)
+            console.log(exception)
         }
     }
 
@@ -174,7 +168,7 @@ const App = () => {
             <h2>Blogs</h2>
             <hr></hr>
 
-            <Notification message={errorMessage} />
+            <Notification />
 
             {/* {user === null ? loginForm() : */}
             {user === null ? <LoginForm
@@ -190,7 +184,7 @@ const App = () => {
                     <hr></hr>
 
                     <Togglable buttonLabel='blog_submit' ref={blogSubmitFormRef}>
-                        <BlogSubmitForm/>
+                        <BlogSubmitForm />
                     </Togglable>
 
                     <h2>Blog List:</h2>

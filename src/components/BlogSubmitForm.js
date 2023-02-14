@@ -1,6 +1,7 @@
 // import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
+import { clearNotification, createNotification } from '../reducers/notificationReducer'
 
 const BlogSubmitForm = () => {
     const dispatch = useDispatch()
@@ -52,6 +53,10 @@ const BlogSubmitForm = () => {
         const likes = event.target.likes.value
 
         dispatch(createBlog({ title, author, url, likes }))
+        dispatch(createNotification(title))
+        setTimeout(() => {
+            dispatch(clearNotification())
+        }, 5000)
         event.target.reset()
     }
 
@@ -68,7 +73,7 @@ const BlogSubmitForm = () => {
                 <label>Url:</label>
                 <input id='urlInput' name='url' placeholder='Insert Url'>
                 </input>
-                <input placeholder='Insert Likes' name='likes' value='0'>
+                <input placeholder='Insert Likes' name='likes' >
                 </input>
                 <button type='submit'>Save</button>
             </form>

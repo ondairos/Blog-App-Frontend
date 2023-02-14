@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialState = {
-    message: 'Hello, this is your init notification',
+    message: '',
     error: 'error here...'
 }
 
@@ -11,7 +11,7 @@ const notificationSlice = createSlice({
     initialState,
     reducers: {
         createNotification: (state, action) => {
-            state.message = `log post: ${action.payload} created!`
+            state.message = `Blog post: ${action.payload} created!`
         },
         // eslint-disable-next-line no-unused-vars
         clearNotification(state, action) {
