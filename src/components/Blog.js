@@ -1,10 +1,11 @@
 // import { useState } from "react"
+// eslint-disable-next-line no-unused-vars
 import { deleteBlogPost, increaseLikes } from '../reducers/blogReducer'
 import Togglable from './Togglable'
 import { useDispatch, useSelector } from 'react-redux'
 
 // eslint-disable-next-line no-unused-vars
-const Blog = ({ blog_remove, currentUser }) => {
+const Blog = ({ blog_remove, handleLike, currentUser }) => {
     const blogStyle = {
         paddingTop: 10,
         paddingLeft: 2,
@@ -20,6 +21,7 @@ const Blog = ({ blog_remove, currentUser }) => {
         let result = blogs
         return result
     })
+    // console.log(blogsRedux)
     const sorted_blogs = [...blogsRedux].sort((a, b) => b.likes - a.likes)
     // -------------
 
@@ -30,9 +32,9 @@ const Blog = ({ blog_remove, currentUser }) => {
 
     }
 
-    const handleLike = (blogPost) => {
-        dispatch(increaseLikes(blogPost))
-    }
+    // const handleLike = (blogPost) => {
+    //     dispatch(increaseLikes(blogPost))
+    // }
 
 
     return (
@@ -49,9 +51,10 @@ const Blog = ({ blog_remove, currentUser }) => {
                                 <br></br>
                                 <p>Likes: {blog.likes ? blog.likes : 0}</p>
                                 <br></br>
-                                <p>User:{blog.user.name || 'N/A'}</p>
+                                <p>User: {blog.user ? blog.user.name || 'N/A' : 'N/A'}</p>
+
                                 <br></br>
-                                <button onClick={() => handleLike(blog._id, blog.user._id)}>Like</button>
+                                <button onClick={() => handleLike(blog._id)}>Like</button>
                                 {currentUser !== null && currentUser.username === blog.user.username && <button onClick={() => deleteBlog(blog)}>delete</button>}
                             </div>
                         </Togglable>
