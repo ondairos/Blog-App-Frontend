@@ -51,13 +51,6 @@ export const deleteBlogPost = (object) => {
     }
 }
 
-// export const increaseLikes = (id) => {
-//     return async (dispatch) => {
-//         const updatedBlogPost = await exportBlogsService.update(id, { likes: 1 })
-//         dispatch(appendLike(updatedBlogPost))
-//     }
-// }
-
 export const increaseLikes = (blogPost) => {
     return async (dispatch) => {
         // console.log(blogPost)
