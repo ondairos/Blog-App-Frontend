@@ -1,10 +1,10 @@
 // import { useState } from "react"
-import { deleteBlogPost } from '../reducers/blogReducer'
+import { deleteBlogPost, increaseLikes } from '../reducers/blogReducer'
 import Togglable from './Togglable'
 import { useDispatch, useSelector } from 'react-redux'
 
 // eslint-disable-next-line no-unused-vars
-const Blog = ({ blog_remove, handleLike, currentUser }) => {
+const Blog = ({ blog_remove, currentUser }) => {
     const blogStyle = {
         paddingTop: 10,
         paddingLeft: 2,
@@ -28,6 +28,10 @@ const Blog = ({ blog_remove, handleLike, currentUser }) => {
 
         dispatch(deleteBlogPost(blogObject))
 
+    }
+
+    const handleLike = (blogPost) => {
+        dispatch(increaseLikes(blogPost))
     }
 
 

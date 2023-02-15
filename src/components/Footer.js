@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <div style={footerStyle}>
             <br />
-            <em>Blog app, Ioannis Kantiloros 2022</em>
+            <em>Blog app, Ioannis Kantiloros 2023</em>
         </div>
     )
 }
