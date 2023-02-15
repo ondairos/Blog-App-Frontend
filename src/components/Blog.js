@@ -51,10 +51,9 @@ const Blog = ({ blog_remove, handleLike, currentUser }) => {
                                 <br></br>
                                 <p>Likes: {blog.likes ? blog.likes : 0}</p>
                                 <br></br>
-                                <p>User: {blog.user ? blog.user.name || 'N/A' : 'N/A'}</p>
-
+                                <p>User: {blog.user ? blog.user.name : 'N/A'}</p>
                                 <br></br>
-                                <button onClick={() => handleLike(blog._id)}>Like</button>
+                                <button onClick={() => handleLike(blog._id, blog.user.id)}>Like</button>
                                 {currentUser !== null && currentUser.username === blog.user.username && <button onClick={() => deleteBlog(blog)}>delete</button>}
                             </div>
                         </Togglable>
