@@ -16,7 +16,7 @@ import { initializedBlogs } from './reducers/blogReducer'
 import { useDispatch } from 'react-redux'
 
 const App = () => {
-    const [blogs, setBlogs] = useState([])
+    // const [blogs, setBlogs] = useState([])
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -107,30 +107,30 @@ const App = () => {
     // }
 
     // //update blog function increase likes
-    const addLike = (blogId, userId) => {
-        // retrieve the current number of likes
-        const currentBlog = blogs.find(blog => blog._id === blogId)
-        if (!currentBlog) {
-            console.error(`Blog with id ${blogId} not found`)
-            return
-        }
-        const currentLikes = currentBlog.likes
+    // const addLike = (blogId, userId) => {
+    //     // retrieve the current number of likes
+    //     const currentBlog = blogs.find(blog => blog._id === blogId)
+    //     if (!currentBlog) {
+    //         console.error(`Blog with id ${blogId} not found`)
+    //         return
+    //     }
+    //     const currentLikes = currentBlog.likes
 
-        // send the current number of likes in the request
-        const newObject = {
-            user: userId,
-            likes: currentLikes + 1
-        }
+    //     // send the current number of likes in the request
+    //     const newObject = {
+    //         user: userId,
+    //         likes: currentLikes + 1
+    //     }
 
-        blogService.update(blogId, newObject)
-            .then((updatedBlog) => {
-                console.log(updatedBlog)
-                setBlogs(blogs.map(element => element._id !== blogId ? element : updatedBlog))
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
+    //     blogService.update(blogId, newObject)
+    //         .then((updatedBlog) => {
+    //             console.log(updatedBlog)
+    //             setBlogs(blogs.map(element => element._id !== blogId ? element : updatedBlog))
+    //         })
+    //         .catch((error) => {
+    //             console.error(error)
+    //         })
+    // }
 
 
 
@@ -159,7 +159,7 @@ const App = () => {
                     </Togglable>
 
                     <h2>Blog List:</h2>
-                    <Blog handleLike={addLike} currentUser={user} />
+                    <Blog currentUser={user} />
                 </div>
             }
             <br></br>

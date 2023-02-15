@@ -5,7 +5,7 @@ import Togglable from './Togglable'
 import { useDispatch, useSelector } from 'react-redux'
 
 // eslint-disable-next-line no-unused-vars
-const Blog = ({ blog_remove, handleLike, currentUser }) => {
+const Blog = ({ blog_remove, currentUser }) => {
     const blogStyle = {
         paddingTop: 10,
         paddingLeft: 2,
@@ -32,16 +32,32 @@ const Blog = ({ blog_remove, handleLike, currentUser }) => {
 
     }
 
-    // const handleLike = (blogPost) => {
-    //     dispatch(increaseLikes(blogPost))
-    // }
+    const handleLike = async (blogPostId) => {
+        // const foundBlog = sorted_blogs.find((specificBlog) => specificBlog.id === blogPostId)
+
+        const foundBlog = sorted_blogs.find((specificBlog) => {
+            return specificBlog._id === blogPostId
+        })
+
+        console.log(`sorted blogs: ${foundBlog._id}`)
+
+        const likedBlog = {
+            ...foundBlog,
+            likes: (foundBlog.likes || 0) + 1,
+            user: foundBlog.user.id
+        }
+
+        dispatch(increaseLikes(likedBlog))
+    }
+
+
 
 
     return (
         <div>
             {
                 sorted_blogs.map(blog =>
-                    <div style={blogStyle} className='main_blog' key={blog.id}>
+                    <div style={blogStyle} className='main_blog' key={blog._id}>
                         <div className="blogTitle">
                             <p><span>{blog.title}</span> by: <span>{blog.author}</span></p>
                         </div>
@@ -53,7 +69,7 @@ const Blog = ({ blog_remove, handleLike, currentUser }) => {
                                 <br></br>
                                 <p>User: {blog.user ? blog.user.name : 'N/A'}</p>
                                 <br></br>
-                                <button onClick={() => handleLike(blog._id, blog.user.id)}>Like</button>
+                                <button onClick={() => handleLike(blog._id)}>Like</button>
                                 {currentUser !== null && currentUser.username === blog.user.username && <button onClick={() => deleteBlog(blog)}>delete</button>}
                             </div>
                         </Togglable>

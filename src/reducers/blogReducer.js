@@ -28,14 +28,8 @@ const blogSlice = createSlice({
             return state.filter(blogPost => blogPost !== action.payload)
         },
         appendLike(state, action) {
-            return state.map(blogPost => {
-                if (blogPost.id === action.payload.id) {
-                    return {
-                        ...blogPost, likes: blogPost.likes + 1
-                    }
-                }
-                return blogPost
-            })
+            const blog = action.payload
+            return state.map((myBlog) => (myBlog.id === blog.id ? blog : myBlog))
         }
     }
 })
@@ -69,11 +63,20 @@ export const deleteBlogPost = (object) => {
     }
 }
 
-export const increaseLikes = (object) => {
+// export const increaseLikes = (id) => {
+//     return async (dispatch) => {
+//         const updatedBlogPost = await exportBlogsService.update(id, { likes: 1 })
+//         dispatch(appendLike(updatedBlogPost))
+//     }
+// }
+
+export const increaseLikes = (blogPost) => {
     return async (dispatch) => {
-        const updatedBlogPost = await exportBlogsService.update(object)
+        // console.log(blogPost)
+        const updatedBlogPost = await exportBlogsService.update(blogPost._id, blogPost)
         dispatch(appendLike(updatedBlogPost))
     }
 }
+
 
 export default blogSlice.reducer
