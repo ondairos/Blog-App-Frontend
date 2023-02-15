@@ -12,30 +12,18 @@ const blogSlice = createSlice({
         setBlogs(state, action) {
             return action.payload
         },
-        setAuthor(state, action) {
-            return action.payload
-        },
-        setUrl(state, action) {
-            return action.payload
-        },
-        setTitle(state, action) {
-            return action.payload
-        },
-        setLikes(state, action) {
-            return action.payload
-        },
         removeBlogPost(state, action) {
             return state.filter(blogPost => blogPost !== action.payload)
         },
         appendLike(state, action) {
             const blog = action.payload
-            return state.map((myBlog) => (myBlog.id === blog.id ? blog : myBlog))
+            return state.map((myBlog) => (myBlog._id === blog._id ? blog : myBlog))
         }
     }
 })
 
 // action reducers
-export const { appendBlog, setBlogs, setAuthor, setUrl, setTitle, setLikes, removeBlogPost, appendLike } = blogSlice.actions
+export const { appendBlog, setBlogs, removeBlogPost, appendLike } = blogSlice.actions
 
 //init blogs
 export const initializedBlogs = () => {

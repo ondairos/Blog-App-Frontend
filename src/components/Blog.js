@@ -33,13 +33,11 @@ const Blog = ({ blog_remove, currentUser }) => {
     }
 
     const handleLike = async (blogPostId) => {
-        // const foundBlog = sorted_blogs.find((specificBlog) => specificBlog.id === blogPostId)
-
         const foundBlog = sorted_blogs.find((specificBlog) => {
             return specificBlog._id === blogPostId
         })
 
-        console.log(`sorted blogs: ${foundBlog._id}`)
+        // console.log(`sorted blogs: ${foundBlog._id}`)
 
         const likedBlog = {
             ...foundBlog,
