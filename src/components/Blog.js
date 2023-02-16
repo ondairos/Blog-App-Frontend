@@ -27,7 +27,6 @@ const Blog = ({ blog_remove, currentUser }) => {
 
 
     const deleteBlog = async (blogObject) => {
-
         dispatch(deleteBlogPost(blogObject))
 
     }
