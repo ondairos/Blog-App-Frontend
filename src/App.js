@@ -13,14 +13,15 @@ import loginService from './services/login'
 
 //redux imports
 import { initializedBlogs } from './reducers/blogReducer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { initUser, loginUser, logoutUser } from './reducers/userReducer'
 
 const App = () => {
     // const [blogs, setBlogs] = useState([])
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [user, setUser] = useState(null)
+    // const [user, setUser] = useState(null)
 
     // ref the blogsubmitform
     const blogSubmitFormRef = useRef()
@@ -37,100 +38,59 @@ const App = () => {
     }, [dispatch])
 
     // save User to local storage effect hook
+    // useEffect(() => {
+    //     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    //     if (loggedUserJSON) {
+    //         const parsedUser = JSON.parse(loggedUserJSON)
+    //         setUser(parsedUser)
+    //         blogService.setToken(parsedUser.token)
+    //     }
+    // }, [])
+
     useEffect(() => {
-        const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-        if (loggedUserJSON) {
-            const parsedUser = JSON.parse(loggedUserJSON)
-            setUser(parsedUser)
-            blogService.setToken(parsedUser.token)
-        }
-    }, [])
+        dispatch(initUser())
+    }, [dispatch])
+
+    const user = useSelector(({ user }) => {
+        return user
+    })
 
     // handle login logic
-    const handleLogin = async (event) => {
-        event.preventDefault()
+    // const handleLogin = async (event) => {
+    //     event.preventDefault()
 
-        try {
-            const user = await loginService.login({
-                username, password,
+    //     try {
+    //         const user = await loginService.login({
+    //             username, password,
+    //         })
+    //         //  save user to local storage from state(user)
+    //         window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
+
+    //         // send the user token for Authorization in the backend through notesService
+    //         blogService.setToken(user.token)
+    //         setUser(user)
+    //         setUsername('')
+    //         setPassword('')
+    //     } catch (exception) {
+    //         console.log(exception)
+    //     }
+    // }
+
+    const handleLogin = async (username, password) => {
+        loginService.login({ username, password })
+            .then((user) => {
+                dispatch(loginUser(user))
+            }).catch((error) => {
+                return console.log(error)
             })
-            //  save user to local storage from state(user)
-            window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
-
-            // send the user token for Authorization in the backend through notesService
-            blogService.setToken(user.token)
-            setUser(user)
-            setUsername('')
-            setPassword('')
-        } catch (exception) {
-            console.log(exception)
-        }
     }
 
-    // clear Local storage function
+    // clear Local storage function LOGOUT
     const clearLocalStorage = () => {
-        window.localStorage.clear()
-        setUser(null)
-        return
+        dispatch(logoutUser())
+        // use notification here TODO
+        console.log('good bye!')
     }
-
-
-    //add blog function
-    // const addBlog = (blogObject) => {
-    //     // with the usage of useRef i use the toggleVisibility from Togglable component
-    //     blogSubmitFormRef.current.toggleVisibility()
-    //     blogService.create(blogObject)
-    //         .then(returnedBlog => {
-    //             setBlogs(blogs.concat(returnedBlog))
-    //             setErrorMessage(
-    //                 `a new blog post: '${returnedBlog.title}' by ${returnedBlog.author} was added!`
-    //             )
-    //             setInterval(() => {
-    //                 setErrorMessage('')
-    //             }, 5000)
-    //         })
-
-    // }
-
-
-    // const addBlog = (blogObject) => {
-    //     blogSubmitFormRef.current.toggleVisibility()
-    //     createBlog(blogObject)
-    //         .then((returnedBlog) => {
-    //             setErrorMessage(
-    //                 `a new blog post: '${returnedBlog.title}' by ${returnedBlog.author} was added!`
-    //             )
-    //             setInterval(() => {
-    //                 setErrorMessage('')
-    //             }, 5000)
-    //         })
-    // }
-
-    // //update blog function increase likes
-    // const addLike = (blogId, userId) => {
-    //     // retrieve the current number of likes
-    //     const currentBlog = blogs.find(blog => blog._id === blogId)
-    //     if (!currentBlog) {
-    //         console.error(`Blog with id ${blogId} not found`)
-    //         return
-    //     }
-    //     const currentLikes = currentBlog.likes
-
-    //     // send the current number of likes in the request
-    //     const newObject = {
-    //         user: userId,
-    //         likes: currentLikes + 1
-    //     }
-
-    //     blogService.update(blogId, newObject)
-    //         .then((updatedBlog) => {
-    //             console.log(updatedBlog)
-    //             setBlogs(blogs.map(element => element._id !== blogId ? element : updatedBlog))
-    //         })
-    //         .catch((error) => {
-    //             console.error(error)
-    //         })
-    // }
 
 
 
