@@ -76,7 +76,7 @@ const App = () => {
     //     }
     // }
 
-    const handleLogin = async (username, password) => {
+    const handleLogin = async (event) => {
         event.preventDefault()
         loginService.login({ username, password })
             .then((user) => {
