@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
+// react router
+// eslint-disable-next-line no-unused-vars
+import { Routes, Route, Link, useNavigate, useMatch, Navigate } from 'react-router-dom'
 
 import Blog from './components/Blog'
 import Notification from './components/Notification'
@@ -7,6 +10,8 @@ import Footer from './components/Footer'
 import LoginForm from './components/LoginForm'
 import BlogSubmitForm from './components/BlogSubmitForm'
 import Togglable from './components/Togglable'
+import Users from './components/Users'
+import User from './components/User'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -99,6 +104,18 @@ const App = () => {
         <div>
             <h2>Blogs</h2>
             <hr></hr>
+            <div className='NavBar'>
+                <Link to={'/'}>Home</Link>
+                <Link to={'/'}>Blogs</Link>
+                <Link to={'/'}>Users</Link>
+            </div>
+
+            <Routes>
+                <Route path='/' element={<App />} />
+                <Route path='users' element={user ? <Users /> : <Navigate replace to='/login' />} />
+                <Route path='users/:id' element={<User />} />
+            </Routes>
+
 
             <Notification />
 
@@ -126,9 +143,9 @@ const App = () => {
             <br></br>
             <hr></hr>
             <Footer />
-
         </div>
     )
 }
+
 
 export default App
