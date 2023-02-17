@@ -14,74 +14,52 @@ import LoginForm from './components/LoginForm'
 import Users from './components/Users'
 import User from './components/User'
 import BlogList from './components/BlogList'
+import BlogDetails from './components/BlogDetails'
 
-import blogService from './services/blogs'
 import loginService from './services/login'
 
 //redux imports
 import { initializedBlogs } from './reducers/blogReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { initUser, loginUser, logoutUser } from './reducers/userReducer'
+import { initUsers } from './reducers/usersReducer'
 
 const App = () => {
     // const [blogs, setBlogs] = useState([])
-
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     // const [user, setUser] = useState(null)
 
-    // ref the blogsubmitform
-    // const blogSubmitFormRef = useRef()
-
     //redux init
     const dispatch = useDispatch()
 
-
-    // getAll blogs effect hook
     useEffect(() => {
-        blogService.getAll().then(() =>
-            dispatch(initializedBlogs())
-        )
+        dispatch(initializedBlogs())
     }, [dispatch])
 
-    // save User to local storage effect hook
-    // useEffect(() => {
-    //     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    //     if (loggedUserJSON) {
-    //         const parsedUser = JSON.parse(loggedUserJSON)
-    //         setUser(parsedUser)
-    //         blogService.setToken(parsedUser.token)
-    //     }
-    // }, [])
+    const blogs = useSelector(({ blogs }) => {
+        return blogs
+    })
 
     useEffect(() => {
         dispatch(initUser())
     }, [dispatch])
 
+    //fetch logged in user
     const user = useSelector(({ user }) => {
         return user
     })
 
-    // handle login logic
-    // const handleLogin = async (event) => {
-    //     event.preventDefault()
+    //users init useffect
+    useEffect(() => {
+        dispatch(initUsers())
+    }, [dispatch])
 
-    //     try {
-    //         const user = await loginService.login({
-    //             username, password,
-    //         })
-    //         //  save user to local storage from state(user)
-    //         window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
-
-    //         // send the user token for Authorization in the backend through notesService
-    //         blogService.setToken(user.token)
-    //         setUser(user)
-    //         setUsername('')
-    //         setPassword('')
-    //     } catch (exception) {
-    //         console.log(exception)
-    //     }
-    // }
+    // fetch users
+    const users = useSelector(({ users }) => {
+        console.log(`main app users: ${users}`)
+        return users
+    })
 
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -99,8 +77,6 @@ const App = () => {
         // use notification here TODO
         console.log('good bye!')
     }
-
-
 
     return (
         <div>
@@ -128,29 +104,21 @@ const App = () => {
             <div className='NavBar'>
                 <Link to={'/'}>Home </Link>
                 <Link to={'/blogs'}>Blogs </Link>
-                <Link to={'/users'}>Users </Link>
+                <Link to={'/users/'}>Users </Link>
             </div>
 
             <Routes>
                 {/* <Route path='/' element={<App />} /> */}
-                <Route path='users' element={user ? <Users /> : <Navigate replace to='/login' />} />
+                <Route path='/users/' element={user ? <Users users={users} /> : <Navigate replace to='/login' />} />
                 <Route path='/users/:id' element={<User />} />
-                <Route path='/blogs' element={<BlogList user={user}/>} />
+                <Route path='/blogs' element={<BlogList user={user} />} />
+                <Route path='/blogs/:id' element={<BlogDetails blogs={blogs} />} />
             </Routes>
 
             <hr></hr>
-
+            <h2>Place to store your blogs!</h2>
+            <h5>Use the navigation bar.</h5>
             {/* {user === null ? <p>Login please</p> : <BlogList user={user} />} */}
-
-
-            {/* <div className='blog_list_main'>
-                <Togglable buttonLabel='blog_submit' ref={blogSubmitFormRef}>
-                    <BlogSubmitForm />
-                </Togglable>
-
-                <h2>Blog List:</h2>
-                <Blog currentUser={user} />
-            </div> */}
             <br></br>
             <hr></hr>
             <Footer />
