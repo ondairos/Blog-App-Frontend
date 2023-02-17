@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // eslint-disable-next-line no-unused-vars
 const Blog = ({ blog_remove, currentUser }) => {
+    console.log(`current user: ${currentUser}`)
     const blogStyle = {
         paddingTop: 10,
         paddingLeft: 2,

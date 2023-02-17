@@ -1,17 +1,19 @@
+// eslint-disable-next-line no-unused-vars
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 // react router
 // eslint-disable-next-line no-unused-vars
 import { Routes, Route, Link, useNavigate, useMatch, Navigate } from 'react-router-dom'
 
-import Blog from './components/Blog'
+// import Blog from './components/Blog'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
 import LoginForm from './components/LoginForm'
-import BlogSubmitForm from './components/BlogSubmitForm'
-import Togglable from './components/Togglable'
+// import BlogSubmitForm from './components/BlogSubmitForm'
+// import Togglable from './components/Togglable'
 import Users from './components/Users'
 import User from './components/User'
+import BlogList from './components/BlogList'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -29,7 +31,7 @@ const App = () => {
     // const [user, setUser] = useState(null)
 
     // ref the blogsubmitform
-    const blogSubmitFormRef = useRef()
+    // const blogSubmitFormRef = useRef()
 
     //redux init
     const dispatch = useDispatch()
@@ -104,20 +106,6 @@ const App = () => {
         <div>
             <h2>Blogs</h2>
             <hr></hr>
-            <div className='NavBar'>
-                <Link to={'/'}>Home</Link>
-                <Link to={'/'}>Blogs</Link>
-                <Link to={'/'}>Users</Link>
-            </div>
-
-            <Routes>
-                <Route path='/' element={<App />} />
-                <Route path='users' element={user ? <Users /> : <Navigate replace to='/login' />} />
-                <Route path='users/:id' element={<User />} />
-            </Routes>
-
-
-            <Notification />
 
             {/* {user === null ? loginForm() : */}
             {user === null ? <LoginForm
@@ -132,14 +120,37 @@ const App = () => {
                     <button onClick={clearLocalStorage}>Logout</button>
                     <hr></hr>
 
-                    <Togglable buttonLabel='blog_submit' ref={blogSubmitFormRef}>
-                        <BlogSubmitForm />
-                    </Togglable>
 
-                    <h2>Blog List:</h2>
-                    <Blog currentUser={user} />
                 </div>
             }
+
+            <Notification />
+            <div className='NavBar'>
+                <Link to={'/'}>Home </Link>
+                <Link to={'/blogs'}>Blogs </Link>
+                <Link to={'/users'}>Users </Link>
+            </div>
+
+            <Routes>
+                {/* <Route path='/' element={<App />} /> */}
+                <Route path='users' element={user ? <Users /> : <Navigate replace to='/login' />} />
+                <Route path='/users/:id' element={<User />} />
+                <Route path='/blogs' element={<BlogList user={user}/>} />
+            </Routes>
+
+            <hr></hr>
+
+            {/* {user === null ? <p>Login please</p> : <BlogList user={user} />} */}
+
+
+            {/* <div className='blog_list_main'>
+                <Togglable buttonLabel='blog_submit' ref={blogSubmitFormRef}>
+                    <BlogSubmitForm />
+                </Togglable>
+
+                <h2>Blog List:</h2>
+                <Blog currentUser={user} />
+            </div> */}
             <br></br>
             <hr></hr>
             <Footer />
