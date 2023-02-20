@@ -5,14 +5,12 @@ import './App.css'
 // eslint-disable-next-line no-unused-vars
 import { Routes, Route, Link, useNavigate, useMatch, Navigate } from 'react-router-dom'
 
-// import Blog from './components/Blog'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
 import LoginForm from './components/LoginForm'
-// import BlogSubmitForm from './components/BlogSubmitForm'
-// import Togglable from './components/Togglable'
+
 import Users from './components/Users'
-// import User from './components/User'
+
 import UserDetails from './components/UserDetails'
 import BlogList from './components/BlogList'
 import BlogDetails from './components/BlogDetails'
