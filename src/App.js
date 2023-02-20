@@ -20,7 +20,7 @@ import BlogDetails from './components/BlogDetails'
 import loginService from './services/login'
 
 //redux imports
-import { initializedBlogs } from './reducers/blogReducer'
+import { initializedBlogs, addCommentsToBlog } from './reducers/blogReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { initUser, loginUser, logoutUser } from './reducers/userReducer'
 import { initUsers } from './reducers/usersReducer'
@@ -79,6 +79,21 @@ const App = () => {
         console.log('good bye!')
     }
 
+    //add comment function
+    const addCommentToBlogPost = async ({ id, comment }) => {
+        const foundBlog = blogs.find((blog) => blog._id === id)
+        const updatedObjectWithComment = foundBlog.comments.concat(comment)
+
+        const finalBlogWithComments = {
+            ...foundBlog, comments: updatedObjectWithComment,
+            user: foundBlog.user.id
+        }
+
+        dispatch(addCommentsToBlog(finalBlogWithComments)).then(() => {
+            console.log('added comment')
+        })
+    }
+
     return (
         <div>
             <h2>Blogs</h2>
@@ -113,7 +128,7 @@ const App = () => {
                 <Route path='/users/' element={user ? <Users users={users} /> : <Navigate replace to='/login' />} />
                 <Route path='/users/:id' element={<UserDetails users={users} />} />
                 <Route path='/blogs' element={<BlogList user={user} />} />
-                <Route path='/blogs/:id' element={<BlogDetails blogs={blogs} />} />
+                <Route path='/blogs/:id' element={<BlogDetails commentsProps={addCommentToBlogPost} blogs={blogs} />} />
             </Routes>
 
             <hr></hr>
