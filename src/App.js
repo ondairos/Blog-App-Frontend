@@ -82,10 +82,12 @@ const App = () => {
     //add comment function
     const addCommentToBlogPost = async ({ id, comment }) => {
         const foundBlog = blogs.find((blog) => blog._id === id)
+        console.log(`inside app JS addcommentBlogPost foundblogs: ${foundBlog.author}`)
         const updatedObjectWithComment = foundBlog.comments.concat(comment)
 
         const finalBlogWithComments = {
-            ...foundBlog, comments: updatedObjectWithComment,
+            ...foundBlog,
+            comments: updatedObjectWithComment,
             user: foundBlog.user.id
         }
 
@@ -98,29 +100,26 @@ const App = () => {
         <div>
             <h2>Blogs</h2>
             <hr></hr>
-
-            {/* {user === null ? loginForm() : */}
-            {user === null ? <LoginForm
-                username={username}
-                password={password}
-                handleUsernameChange={({ target }) => setUsername(target.value)}
-                handlePasswordChange={({ target }) => setPassword(target.value)}
-                handleSubmit={handleLogin}
-            /> :
-                <div>
-                    <p>{user.name} logged-in</p>
-                    <button onClick={clearLocalStorage}>Logout</button>
-                    <hr></hr>
-
-
-                </div>
-            }
-
             <Notification />
             <div className='NavBar'>
-                <Link to={'/'}>Home </Link>
-                <Link to={'/blogs'}>Blogs </Link>
-                <Link to={'/users/'}>Users </Link>
+                {user === null ? <LoginForm
+                    username={username}
+                    password={password}
+                    handleUsernameChange={({ target }) => setUsername(target.value)}
+                    handlePasswordChange={({ target }) => setPassword(target.value)}
+                    handleSubmit={handleLogin}
+                /> :
+                    <div>
+                        <p>{user.name} logged-in</p>
+                        <button onClick={clearLocalStorage}>Logout</button>
+                        <hr></hr>
+
+
+                    </div>
+                }
+                <Link className='NavBar_Home' to={'/'}>Home </Link>
+                <Link className='NavBar_Blogs' to={'/blogs'}>Blogs </Link>
+                <Link className='NavBar_Users' to={'/users/'}>Users </Link>
             </div>
 
             <Routes>
