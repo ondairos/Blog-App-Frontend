@@ -19,7 +19,7 @@ const getAll = () => {
 
 // create function for blog service
 const create = async newBlogObject => {
-    const response = await axios.post(baseUrl, newBlogObject, config)
+    const response = await axios.post(baseUrl, newBlogObject, config())
     return response.data
 }
 
@@ -39,7 +39,7 @@ const update = async (id, newObject) => {
 
 //delete
 const deleteB = async (id) => {
-    const request = await axios.delete(`${baseUrl}/${id}`, config)
+    const request = await axios.delete(`${baseUrl}/${id}`, config())
     return request.data
 }
 
