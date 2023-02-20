@@ -12,7 +12,8 @@ import LoginForm from './components/LoginForm'
 // import BlogSubmitForm from './components/BlogSubmitForm'
 // import Togglable from './components/Togglable'
 import Users from './components/Users'
-import User from './components/User'
+// import User from './components/User'
+import UserDetails from './components/UserDetails'
 import BlogList from './components/BlogList'
 import BlogDetails from './components/BlogDetails'
 
@@ -110,7 +111,7 @@ const App = () => {
             <Routes>
                 {/* <Route path='/' element={<App />} /> */}
                 <Route path='/users/' element={user ? <Users users={users} /> : <Navigate replace to='/login' />} />
-                <Route path='/users/:id' element={<User />} />
+                <Route path='/users/:id' element={<UserDetails users={users} />} />
                 <Route path='/blogs' element={<BlogList user={user} />} />
                 <Route path='/blogs/:id' element={<BlogDetails blogs={blogs} />} />
             </Routes>
