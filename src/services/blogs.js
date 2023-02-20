@@ -37,12 +37,18 @@ const update = async (id, newObject) => {
     return response.data
 }
 
+//add comment no authorization
+const addComment = (id, newObject) => {
+    const request = axios.post(`${baseUrl}/${id}/comments`, newObject)
+    return request.then((response) => response.data)
+}
+
 //delete
 const deleteB = async (id) => {
     const request = await axios.delete(`${baseUrl}/${id}`, config)
     return request.data
 }
 
-const exportBlogsService = { getAll, create, update, deleteB }
+const exportBlogsService = { getAll, create, update, deleteB, addComment }
 
 export default exportBlogsService
