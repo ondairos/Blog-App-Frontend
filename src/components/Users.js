@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap'
 
 
 const Users = ({ users }) => {
-    console.log(`users component: ${users}`)
+    // console.log(`users component: ${users}`)
     //find user blog count
     const userBlogCount = (user) => {
         return user.blogPosts.length
