@@ -7,8 +7,8 @@ import { Routes, Route, Link, useNavigate, useMatch, Navigate } from 'react-rout
 
 import Notification from './components/Notification'
 import Footer from './components/Footer'
+import { Home } from './components/Home'
 import LoginForm from './components/LoginForm'
-
 import Users from './components/Users'
 
 import UserDetails from './components/UserDetails'
@@ -121,17 +121,12 @@ const App = () => {
             </div>
 
             <Routes>
-                {/* <Route path='/' element={<App />} /> */}
-                <Route path='/users/' element={user ? <Users users={users} /> : <Navigate replace to='/login' />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/users' element={user ? <Users users={users} /> : <Navigate replace to='/login' />} />
                 <Route path='/users/:id' element={<UserDetails users={users} />} />
                 <Route path='/blogs' element={<BlogList user={user} />} />
                 <Route path='/blogs/:id' element={<BlogDetails commentsProps={addCommentToBlogPost} blogs={blogs} />} />
             </Routes>
-
-            <hr></hr>
-            <h2>Place to store your blogs!</h2>
-            <h5>Use the navigation bar.</h5>
-            {/* {user === null ? <p>Login please</p> : <BlogList user={user} />} */}
             <br></br>
             <hr></hr>
             <Footer />

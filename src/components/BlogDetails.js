@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 
 const BlogDetails = ({ blogs, commentsProps }) => {
@@ -23,21 +24,28 @@ const BlogDetails = ({ blogs, commentsProps }) => {
 
 
     return (
-        <div>
-            <p>Blog details</p>
-            <p><b>{foundBlogId.title}</b> by <b>{foundBlogId.author}</b></p>
-            <p>{foundBlogId.url}</p>
-            {/* <p>added by user: {foundBlogId.user}</p> */}
-            <p>{foundBlogId.likes}</p>
-            <p>{foundBlogId.comments}</p>
-
-            <form onSubmit={handleComment}>
+        <>
+            {foundBlogId ?
                 <div>
-                    <input value={comment} name='comment' id='comment' placeholder='add your comment here' onChange={({ target }) => setComment(target.value)}></input>
+                    <p>Blog details</p>
+                    <p><b>{foundBlogId.title}</b> by <b>{foundBlogId.author}</b></p>
+                    <p>{foundBlogId.url}</p>
+                    {/* <p>added by user: {foundBlogId.user}</p> */}
+                    <p>{foundBlogId.likes}</p>
+                    <p>{foundBlogId.comments}</p>
+
+                    <form onSubmit={handleComment}>
+                        <div>
+                            <input value={comment} name='comment' id='comment' placeholder='add your comment here' onChange={({ target }) => setComment(target.value)}></input>
+                        </div>
+                        <Button variant="primary" type='submit' id='create-comment'>Add Comment</Button>
+                    </form>
                 </div>
-                <button type='submit' id='create-comment'>Add Comment</button>
-            </form>
-        </div>
+                :
+                <div>Loading...</div>
+            }
+
+        </>
     )
 }
 
